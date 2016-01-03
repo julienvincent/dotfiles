@@ -1,0 +1,7 @@
+alias drun="docker-compose run"
+alias dstop="docker-compose stop"
+alias drm="docker-compose rm"
+alias dup="docker-compose up"
+alias dbuild="docker-compose build"
+
+alias dmd="docker-machine start dev && eval "$(docker-machine env dev)""

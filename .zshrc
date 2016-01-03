@@ -85,3 +85,6 @@ source $ZSH/oh-my-zsh.sh
 wd() {
   . /Users/julienvincent/bin/wd/wd.sh
 }
+
+source ~/.aliases
+source ~/.env

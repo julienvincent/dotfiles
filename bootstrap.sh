@@ -13,4 +13,4 @@ rsync \
 	--exclude ".osx" \
 	--exclude "config/" \
 	--exclude ".idea/" \
-	--exclude "LICENSE-MIT.txt" -avh --no-perms . ~;
+	--exclude "LICENSE-MIT.txt" -avh --no-perms ~/.dotfiles/. ~;
