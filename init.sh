@@ -6,7 +6,7 @@ cd "$(dirname "${BASH_SOURCE}")";
 mkdir code
 
 # brew installs
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 sh brew.sh
 
 # zsh install
