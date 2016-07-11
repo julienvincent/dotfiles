@@ -1,0 +1,67 @@
+{
+  "*": {
+    "env": "production",
+    "core": {
+      "themes": [
+        "ui-light",
+        "ui-darkside"
+      ],
+      "disabledPackages": [
+        "message-view-on-github",
+        "personal-level-indicators",
+        "phishing-detection",
+        "github-contact-card",
+        "keybase"
+      ],
+      "disabledPackagesInitialized": true,
+      "workspace": {
+        "mode": "split"
+      }
+    },
+    "nylas": {
+      "threadCountsValid": true,
+      "accounts": [
+        {
+          "client_id": "local-6419fee0-fa55",
+          "server_id": "2da8w9jdf27dmvhfd4gypwzy3",
+          "object": "account",
+          "account_id": "2da8w9jdf27dmvhfd4gypwzy3",
+          "metadata": [],
+          "name": "Julien Vincent",
+          "provider": "gmail",
+          "email_address": "julienlucvincent@gmail.com",
+          "organization_unit": "label",
+          "label": "julienlucvincent@gmail.com",
+          "aliases": [],
+          "sync_state": "running",
+          "id": "2da8w9jdf27dmvhfd4gypwzy3"
+        }
+      ],
+      "accountsVersion": 4,
+      "identity": {
+        "valid_until": 1466018176,
+        "firstname": "Julien",
+        "lastname": "Vincent",
+        "free_until": null,
+        "email": "julienlucvincent@gmail.com",
+        "id": "4j2j6y9yc1i555w9pt7y5rvbe",
+        "seen_welcome_page": true
+      },
+      "usedDevMode": false,
+      "firstDaySeen": "07/10/2016"
+    },
+    "threadSearchIndexVersion": 1,
+    "plugins": {
+      "1hnytbkg4wd1ahodatwxdqlb5": {
+        "lastAuth": {
+          "2da8w9jdf27dmvhfd4gypwzy3": 1468192558064
+        }
+      },
+      "a1ec1s3ieddpik6lpob74hmcq": {
+        "lastAuth": {
+          "2da8w9jdf27dmvhfd4gypwzy3": 1468192558085
+        }
+      }
+    }
+  }
+}

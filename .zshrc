@@ -5,7 +5,8 @@ export ZSH=/Users/julienvincent/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_CUSTOM=$HOME/.zsh-theme
+ZSH_THEME="lambda"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -88,3 +89,13 @@ wd() {
 
 source ~/.aliases
 source ~/.env
+export PATH=${PATH}:/Users/julienvincent/SDK/android/tools:/Users/julienvincent/SDK/android/platform-tools
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/julienvincent/SDK/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/julienvincent/SDK/google-cloud-sdk/completion.zsh.inc'
+wd() {
+  . /Users/julienvincent/bin/wd/wd.sh
+}
