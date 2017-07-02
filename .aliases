@@ -5,8 +5,7 @@ alias dup="docker-compose up"
 alias dbuild="docker-compose build"
 alias kube="kubectl"
 alias rn="react-native"
-
-alias eval-dev="eval $(docker-machine env dev)"
+eval "$(thefuck --alias)"
 
 alias hide-iterm="/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' /Applications/iTerm.app/Contents/Info.plist"
 alias show-iterm="/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' /Applications/iTerm.app/Contents/Info.plist"

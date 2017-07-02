@@ -1,6 +1,7 @@
 # This is Git's per-user configuration file.
-[push]
-	default = simple
 [user]
+# Please adapt and uncomment the following lines:
 	name = Julien Vincent
 	email = julienlucvincent@gmail.com
+[push]
+	default = simple
