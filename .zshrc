@@ -1,54 +1,35 @@
 export ZSH=/Users/julienvincent/.oh-my-zsh
 
-ZSH_CUSTOM=$HOME/.zsh-theme
-ZSH_THEME="lambda"
+fpath=( "$HOME/.dotfiles/.zsh-custom/functions" $fpath )
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
+ZSH_THEME=""
 ENABLE_CORRECTION="false"
 
-# Plugins can be found in ~/.oh-my-zsh/plugins/*
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git wd)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  git
+)
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-source $ZSH/oh-my-zsh.sh
+source ${ZSH}/oh-my-zsh.sh
 
-wd() {
-  . /Users/julienvincent/bin/wd/wd.sh
-}
+# pure prompt theme
+autoload -U promptinit; promptinit
+prompt pure
 
-source ~/.aliases
-source ~/.env
+# ----- ALIASES ----- #
 
-# DOCKER MACHINE
-#if [ "$(docker-machine status)" = "Running" ]
-#then
-#    eval "$(docker-machine env default)"
-#fi
-#start-docker() {
-#    if [ "$(docker-machine status)" = "Running" ]
-#    then
-#        eval "$(docker-machine env default)"
-#    else
-#        docker-machine start default
-#        start-docker
-#    fi
-#}
+alias kube="kubectl"
+alias kubed="yarn kube"
+alias rn="react-native"
+alias jacl="journey-dev"
+alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool false"
+alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool true"
 
-# GOOGLE CLOUD
-source '/Applications/google-cloud-sdk/path.zsh.inc'
-source '/Applications/google-cloud-sdk/completion.zsh.inc'
+# ----- EXPORTS ----- #
 
-# NVM
-export NVM_DIR="/Users/julienvincent/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export EDITOR=vim
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# OPAM
-. /Users/julienvincent/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-export PATH="$PATH:`yarn global bin`"
+# ----- AUTO ----- #
