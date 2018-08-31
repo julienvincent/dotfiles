@@ -14,3 +14,5 @@ chmod +x prettyping
 mv prettyping /usr/local/bin/pping
 
 cp .zshrc ~/.zshrc
+
+echo "vscode gist: 64169414cea291041e10a00fc1abc430"
