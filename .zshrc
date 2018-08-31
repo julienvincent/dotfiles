@@ -27,9 +27,11 @@ alias rn="react-native"
 alias jacl="journey-dev"
 alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool false"
 alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool true"
+alias preview="fzf --preview 'bat --color \"always\" {}'"
 
 # ----- EXPORTS ----- #
 
 export EDITOR=vim
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
 
 # ----- AUTO ----- #
