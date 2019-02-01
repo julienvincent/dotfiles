@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 
+# General tooling
 brew install fzf
 brew install bat
 brew install htop
 brew install tldr
 
+# Docker tools
+brew tap wagoodman/dive
+brew install dive
+
+# Kubernetes tools
+brew install kubectx
+brew install stern
+
+# Git diff niceties
 brew install diff-so-fancy
 git config --global core.pager "diff-so-fancy | less --tabs=2 -RFX"
 git config --bool --global diff-so-fancy.stripLeadingSymbols false

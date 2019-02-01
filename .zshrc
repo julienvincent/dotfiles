@@ -19,19 +19,29 @@ source ${ZSH}/oh-my-zsh.sh
 autoload -U promptinit; promptinit
 prompt pure
 
+# ----- AUTO-COMPLETION ----- #
+
+source <(kubectl completion zsh)
+
 # ----- ALIASES ----- #
 
 alias kube="kubectl"
-alias kubed="yarn kube"
+alias kube-ns="kubectl config set-context $(kubectl config current-context) --namespace"
 alias rn="react-native"
-alias jacl="journey-dev"
 alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool false"
 alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool true"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
+
+# JourneyApps stuff
+screen_base="id:1808089285 res:2560x1440x60"
+alias iamsitting="displayplacer '${screen_base} origin:(-426,-1440)'"
+alias iamstanding="displayplacer '${screen_base} origin:(1680,-390)'"
 
 # ----- EXPORTS ----- #
 
 export EDITOR=vim
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
+export ANDROID_HOME=/Users/julienvincent/Library/Android/sdk
+export AWS_VAULT_KEYCHAIN_NAME=login
 
 # ----- AUTO ----- #
