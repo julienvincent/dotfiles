@@ -22,6 +22,7 @@ prompt pure
 # ----- AUTO-COMPLETION ----- #
 
 source <(kubectl completion zsh)
+source <(stern --completion=zsh)
 
 # ----- ALIASES ----- #
 
