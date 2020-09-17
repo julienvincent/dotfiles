@@ -19,6 +19,31 @@ source ${ZSH}/oh-my-zsh.sh
 autoload -U promptinit; promptinit
 prompt pure
 
+# ----- FUNCTIONS ----- #
+
+sternToJQ () {
+  PARSER='.message'
+
+  if [[ "${2}" != ""  ]]; then {
+    PARSER=${2}
+  }
+  fi
+
+  stern ${1} -o raw |\
+  grep --line-buffered '^{"' --color=never |\
+  jq --unbuffered ${PARSER}
+}
+
+# Function to shorten keypresses for authenticating a command with
+# aws iam
+#
+# > iam root kubectl get pods
+# =
+# > aws-vault exec root -- kubectl get pods
+iam () {
+  aws-vault exec "${1}" -- "${@:2}"
+}
+
 # ----- AUTO-COMPLETION ----- #
 
 source <(kubectl completion zsh)
@@ -27,22 +52,43 @@ source <(stern --completion=zsh)
 # ----- ALIASES ----- #
 
 alias kube="kubectl"
-alias kube-ns="kubectl config set-context $(kubectl config current-context) --namespace"
-alias rn="react-native"
-alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool false"
-alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool true"
-alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias jsonlog="sternToJQ"
 
-# JourneyApps stuff
-screen_base="id:1808089285 res:2560x1440x60"
-alias iamsitting="displayplacer '${screen_base} origin:(-426,-1440)'"
-alias iamstanding="displayplacer '${screen_base} origin:(1680,-390)'"
+alias wo="webstorm ."
+alias rmo="rubymine ."
+
+alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool false"
+alias keyrepeat-on="defaults write -g ApplePressAndHoldEnabled -bool true"
+
+alias dcup="docker-compose up"
+
+alias iams="iam kubernetes-staging"
+alias iamp="iam kubernetes-production"
 
 # ----- EXPORTS ----- #
 
 export EDITOR=vim
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
 export ANDROID_HOME=/Users/julienvincent/Library/Android/sdk
 export AWS_VAULT_KEYCHAIN_NAME=login
+export RBENV_ROOT="/usr/local/var/rbenv"
+export PATH=$PATH:$(go env GOPATH)/bin
+
+# For node-rdkafka
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export LDFLAGS=-L/usr/local/opt/openssl/lib
 
 # ----- AUTO ----- #
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(rbenv init -)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/julienvincent/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/julienvincent/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/julienvincent/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/julienvincent/google-cloud-sdk/completion.zsh.inc'; fi
