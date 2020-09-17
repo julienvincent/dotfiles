@@ -25,4 +25,9 @@ mv prettyping /usr/local/bin/pping
 
 cp .zshrc ~/.zshrc
 
+# To install plugins, run :PlugInstall
+cp .vimrc ~/.vimrc
+
+$(brew --prefix)/opt/fzf/install
+
 echo "vscode gist: 64169414cea291041e10a00fc1abc430"
