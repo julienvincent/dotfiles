@@ -21,7 +21,7 @@ prompt pure
 
 # ----- FUNCTIONS ----- #
 
-sternToJQ () {
+prettyStern () {
   PARSER='.message'
 
   if [[ "${2}" != ""  ]]; then {
@@ -31,7 +31,7 @@ sternToJQ () {
 
   stern ${1} -o raw |\
   grep --line-buffered '^{"' --color=never |\
-  jq --unbuffered ${PARSER}
+  jq -r --unbuffered ${PARSER}
 }
 
 # Function to shorten keypresses for authenticating a command with
@@ -53,7 +53,7 @@ source <(stern --completion=zsh)
 
 alias kube="kubectl"
 alias k="kubectl"
-alias jsonlog="sternToJQ"
+alias pstern="prettyStern"
 
 alias wo="webstorm ."
 alias rmo="rubymine ."
