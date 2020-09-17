@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 # General tooling
 brew install fzf
 brew install bat
 brew install htop
 brew install tldr
+brew install ngrok
 
 # Docker tools
-brew tap wagoodman/dive
-brew install dive
+brew install docker-credential-helper-ecr
 
 # Kubernetes tools
+brew install kubectl
 brew install kubectx
 brew install stern
 
@@ -24,9 +27,7 @@ chmod +x prettyping
 mv prettyping /usr/local/bin/pping
 
 cp .zshrc ~/.zshrc
-
-# To install plugins, run :PlugInstall
-cp .vimrc ~/.vimrc
+cp .vimrc ~/.vimrc # To install plugins, run :PlugInstall
 
 $(brew --prefix)/opt/fzf/install
 
