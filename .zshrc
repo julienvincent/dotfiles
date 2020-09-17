@@ -52,6 +52,7 @@ source <(stern --completion=zsh)
 # ----- ALIASES ----- #
 
 alias kube="kubectl"
+alias k="kubectl"
 alias jsonlog="sternToJQ"
 
 alias wo="webstorm ."
@@ -72,10 +73,6 @@ export ANDROID_HOME=/Users/julienvincent/Library/Android/sdk
 export AWS_VAULT_KEYCHAIN_NAME=login
 export RBENV_ROOT="/usr/local/var/rbenv"
 export PATH=$PATH:$(go env GOPATH)/bin
-
-# For node-rdkafka
-export CPPFLAGS=-I/usr/local/opt/openssl/include
-export LDFLAGS=-L/usr/local/opt/openssl/lib
 
 # ----- AUTO ----- #
 

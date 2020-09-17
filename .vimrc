@@ -16,10 +16,14 @@ endif
 " a set of vim-plug plugins to include
 call plug#begin('~/.vim/plugged')
 
+Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
 
 call plug#end()
 
-" Enable the gruvbox color scheme
+" enable the gruvbox color scheme
 autocmd vimenter * colorscheme gruvbox
+
+" map Ctrl-n to toggle NERDTree
+map <C-n> :NERDTreeToggle<CR>
 
