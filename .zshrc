@@ -34,6 +34,16 @@ prettyStern () {
   jq -r --unbuffered ${PARSER}
 }
 
+# delete local git branches no longer present on the remote
+pruneGitBranches () {
+  git remote prune origin
+
+  git branch --merged | sed  's/\*.*//' > \
+    /tmp/merged-branches && \
+    vim /tmp/merged-branches && \
+  xargs git branch -d < /tmp/merged-branches
+}
+
 # Function to shorten keypresses for authenticating a command with
 # aws iam
 #
@@ -65,6 +75,8 @@ alias dcup="docker-compose up"
 
 alias iams="iam kubernetes-staging"
 alias iamp="iam kubernetes-production"
+
+alias git-prune-branches="pruneGitBranches"
 
 # ----- EXPORTS ----- #
 

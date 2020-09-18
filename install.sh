@@ -34,7 +34,6 @@ mv prettyping /usr/local/bin/pping
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-cp -a .zsh-custom ~/.zsh-custom
 cp .zshrc ~/.zshrc
 cp .vimrc ~/.vimrc # To install plugins, run :PlugInstall
 
