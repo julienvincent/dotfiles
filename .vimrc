@@ -4,6 +4,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+set backspace=indent,eol,start
 
 " This script will auto-install vim-plug plugin manager
 " https://github.com/junegunn/vim-plug

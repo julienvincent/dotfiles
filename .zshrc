@@ -19,6 +19,12 @@ source ${ZSH}/oh-my-zsh.sh
 autoload -U promptinit; promptinit
 prompt pure
 
+# ----- SETTINGS ----- #
+
+# Enable VIM
+#set keyseq-timeout 0
+#set -o vi
+
 # ----- FUNCTIONS ----- #
 
 prettyStern () {
@@ -44,6 +50,10 @@ pruneGitBranches () {
   xargs git branch -d < /tmp/merged-branches
 }
 
+prenv () {
+  env $(cat .env) "${@}"
+}
+
 # Function to shorten keypresses for authenticating a command with
 # aws iam
 #
@@ -61,7 +71,8 @@ source <(stern --completion=zsh)
 
 # ----- ALIASES ----- #
 
-alias kube="kubectl"
+alias p="pnpm"
+alias px="pnpx"
 alias k="kubectl"
 alias pstern="prettyStern"
 
@@ -77,6 +88,7 @@ alias iams="iam kubernetes-staging"
 alias iamp="iam kubernetes-production"
 
 alias git-prune-branches="pruneGitBranches"
+alias fscan="du -hs * | sort -rh | head -10"
 
 # ----- EXPORTS ----- #
 
@@ -101,3 +113,4 @@ if [ -f '/Users/julienvincent/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/j
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/julienvincent/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/julienvincent/google-cloud-sdk/completion.zsh.inc'; fi
+
