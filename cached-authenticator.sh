@@ -6,15 +6,14 @@
 # at my screen while this troll fetches a new token every god damn time I make a request FUCK MAN COMMON IT EVEN HAS AN
 # EXPIRY BUILT INTO THE FUCKING OUTPUT BUT WHY WOULD IT USE IT WHEN IT CAN JUST MAKE A NEW REQUEST EVERY TIME AMIRITE?!
 
+# Example usage: ./cached-authenticator.sh aws-vault exec <profile> -- aws eks get-token --cluster-name <cluster-name> --region <region>
+
 set -e
 
-cache_file="${HOME}/.journey/kube-auth-cache.json"
+cache_file="${HOME}/.kube/kube-auth-cache.json"
 
-profile="${1}"
-cluster="${2}"
-region="${3}"
-
-key="${region}-${cluster}-${profile}"
+cmd="${@}"
+key="$(echo -n "${cmd}" | base64)"
 
 cache="{}"
 if [ -f "${cache_file}" ]; then
@@ -26,7 +25,7 @@ cached_token=$(echo "${cache}" | jq -r --arg key "${key}" '.[$key] //empty')
 token=""
 if [[ ! -z "${cached_token}" ]]; then
   expires_at=$(echo "${cached_token}" | jq -r '.status.expirationTimestamp')
-  expires_at=$(date -u -j -f "%Y-%m-%dT%H:%M:%SZ" "${expires_at}" "+%s")
+  expires_at=$(date -ujf "%Y-%m-%dT%H:%M:%SZ" "${expires_at}" "+%s")
   now=$(date -u "+%s")
 
   # remove 30s from date to account for jitter
@@ -40,8 +39,7 @@ if [[ ! -z "${token}" ]]; then
   exit 0
 fi
 
-token=$(aws-vault exec ${profile} -- aws eks get-token --region=${region} --cluster-name=${cluster})
-
+token=$($cmd)
 echo "${cache}" | jq --arg key "${key}" --arg token "${token}" '. + {($key): $token}' > "${cache_file}"
 
 echo "${token}"
