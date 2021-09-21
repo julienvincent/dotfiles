@@ -26,11 +26,11 @@ cached_token=$(echo "${cache}" | jq -r --arg key "${key}" '.[$key] //empty')
 token=""
 if [[ ! -z "${cached_token}" ]]; then
   expires_at=$(echo "${cached_token}" | jq -r '.status.expirationTimestamp')
-  expires_at=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "${expires_at}" "+%s")
-  now=$(date "+%s")
+  expires_at=$(date -u -j -f "%Y-%m-%dT%H:%M:%SZ" "${expires_at}" "+%s")
+  now=$(date -u "+%s")
 
   # remove 30s from date to account for jitter
-  if [[ now -ge $(($expires_at - 30)) ]]; then
+  if [[ $(($expires_at - 30)) -ge $now ]]; then
     token="${cached_token}"
   fi
 fi
