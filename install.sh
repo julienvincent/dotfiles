@@ -9,6 +9,7 @@ brew install htop
 brew install tldr
 brew install ngrok
 brew install zsh
+brew install fnm
 
 # Docker tools
 brew install docker-credential-helper-ecr
@@ -33,8 +34,10 @@ mv prettyping /usr/local/bin/pping
 
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 cp .zshrc ~/.zshrc
+cp .p10k.zsh ~/.p10k.zsh
 cp .vimrc ~/.vimrc # To install plugins, run :PlugInstall
 
 $(brew --prefix)/opt/fzf/install
