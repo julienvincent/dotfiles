@@ -27,17 +27,8 @@ prompt pure
 
 # ----- FUNCTIONS ----- #
 
-prettyStern () {
-  PARSER='.message'
-
-  if [[ "${2}" != ""  ]]; then {
-    PARSER=${2}
-  }
-  fi
-
-  stern ${1} -o raw |\
-  grep --line-buffered '^{"' --color=never |\
-  jq -r --unbuffered ${PARSER}
+sternc () {
+  stern "${@}" -o raw | grep --line-buffered '^{"' --color=never
 }
 
 # delete local git branches no longer present on the remote
@@ -74,10 +65,10 @@ source <(stern --completion=zsh)
 alias p="pnpm"
 alias px="pnpx"
 alias k="kubectl"
-alias pstern="prettyStern"
 
-alias wo="webstorm ."
+# alias wo="webstorm ."
 alias rmo="rubymine ."
+alias co="code --add ."
 
 alias keyrepeat-off="defaults write -g ApplePressAndHoldEnabled -bool false"
 alias keyrepeat-on="defaults write -g ApplePressAndHoldEnabled -bool true"
@@ -90,6 +81,9 @@ alias iamp="iam kubernetes-production"
 alias git-prune-branches="pruneGitBranches"
 alias fscan="du -hs * | sort -rh | head -10"
 
+alias pushup="git push -u origin HEAD"
+alias set-upstream="git branch --set-upstream-to=origin/`git branch --show-current`"
+
 # ----- EXPORTS ----- #
 
 export EDITOR=vim
@@ -97,6 +91,11 @@ export ANDROID_HOME=/Users/julienvincent/Library/Android/sdk
 export AWS_VAULT_KEYCHAIN_NAME=login
 export RBENV_ROOT="/usr/local/var/rbenv"
 export PATH=$PATH:$(go env GOPATH)/bin
+
+# Configured the journey-formatter precommit hook to automatically format and git add files when committing
+export JOURNEY_FORMATTER_AUTO_FORMAT=1
+
+export PULUMI_K8S_SUPPRESS_HELM_HOOK_WARNINGS=true
 
 # ----- AUTO ----- #
 
@@ -113,4 +112,6 @@ if [ -f '/Users/julienvincent/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/j
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/julienvincent/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/julienvincent/google-cloud-sdk/completion.zsh.inc'; fi
+
+. "$HOME/.cargo/env"
 
