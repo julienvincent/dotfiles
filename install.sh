@@ -4,9 +4,6 @@ set -eo pipefail
 
 # General tooling
 brew install fzf
-brew install bat
-brew install htop
-brew install tldr
 brew install ngrok
 brew install zsh
 brew install fnm
@@ -34,6 +31,7 @@ mv prettyping /usr/local/bin/pping
 
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Install Powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 cp .zshrc ~/.zshrc
