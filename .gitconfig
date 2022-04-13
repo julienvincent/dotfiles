@@ -1,0 +1,28 @@
+# Visual
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    side-by-side = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+# Behaviour
+
+[pull]
+	rebase = false
+[user]
+	name = Julien Vincent
+	email = julienlucvincent@gmail.com
+[init]
+	defaultBranch = master
+

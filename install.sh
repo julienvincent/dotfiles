@@ -7,6 +7,11 @@ brew install fzf
 brew install ngrok
 brew install zsh
 brew install fnm
+brew install rbenv
+brew install jq
+brew install bat
+brew install git-delta
+brew install dog
 
 # Docker tools
 brew install docker-credential-helper-ecr
@@ -24,19 +29,12 @@ brew install diff-so-fancy
 git config --global core.pager "diff-so-fancy | less --tabs=2 -RFX"
 git config --bool --global diff-so-fancy.stripLeadingSymbols false
 
-# Install prettyping
-curl -O https://raw.githubusercontent.com/denilsonsa/prettyping/master/prettyping
-chmod +x prettyping
-mv prettyping /usr/local/bin/pping
-
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Install Powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-cp .zshrc ~/.zshrc
-cp .p10k.zsh ~/.p10k.zsh
-cp .vimrc ~/.vimrc # To install plugins, run :PlugInstall
+./sync-down.sh
 
 $(brew --prefix)/opt/fzf/install
 

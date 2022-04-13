@@ -2141,11 +2141,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 12</string>
+			<string>MesloLGS-NF-Regular 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 12</string>
+			<string>MesloLGS-NF-Regular 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Option Key Sends</key>
@@ -3011,11 +3011,11 @@
 			<key>Name</key>
 			<string>Hotkey Window</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 12</string>
+			<string>MesloLGS-NF-Regular 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 12</string>
+			<string>MesloLGS-NF-Regular 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Option Key Sends</key>

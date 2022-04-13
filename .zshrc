@@ -58,8 +58,13 @@ source <(stern --completion=zsh)
 # ----- ALIASES ----- #
 
 alias p="pnpm"
+alias pl="pnpm link --global"
 alias px="pnpx"
+
 alias k="kubectl"
+alias ka="kafkactl"
+
+alias ls="lsd"
 
 # alias wo="webstorm ."
 alias rmo="rubymine ."
@@ -76,10 +81,11 @@ alias fscan="du -hs * | sort -rh | head -10"
 
 # ----- EXPORTS ----- #
 
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/gcloud/bin:$PATH"
+
 export EDITOR=vim
 export AWS_VAULT_KEYCHAIN_NAME=login
-export RBENV_ROOT="/usr/local/var/rbenv"
-export PATH=$PATH:$(go env GOPATH)/bin
 
 # Configured the journey-formatter precommit hook to automatically format and git add files when committing
 export JOURNEY_FORMATTER_AUTO_FORMAT=1
@@ -95,7 +101,4 @@ eval "$(fnm env)"
 eval "$(rbenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/julienvincent/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/julienvincent/google-cloud-sdk/path.zsh.inc'; fi
 
