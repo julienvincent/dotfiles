@@ -57,7 +57,7 @@ fn main() -> std::io::Result<()> {
 
   let valid = match token {
     Value::Object(value) => is_token_valid(value),
-    _ => false
+    _ => false,
   };
 
   if valid {
@@ -67,6 +67,8 @@ fn main() -> std::io::Result<()> {
 
   let result = std::process::Command::new(&args[0])
     .args(&args[1..])
+    .stdin(std::process::Stdio::inherit())
+    // .stdout(std::process::Stdio::inherit())
     .output()
     .expect("Failed to execute process");
 
