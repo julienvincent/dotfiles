@@ -1,28 +1,54 @@
 # Visual
 
 [core]
-    pager = delta
-
+	pager = diff-so-fancy | less --tabs=2 -RFX
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = diff-so-fancy --patch
 
-[delta]
-    navigate = true  # use n and N to move between diff sections
-    side-by-side = true
+[color]
+	ui = true
 
-[merge]
-    conflictstyle = diff3
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 
-[diff]
-    colorMoved = default
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 
 # Behaviour
 
-[pull]
-	rebase = false
-[user]
-	name = Julien Vincent
-	email = julienlucvincent@gmail.com
 [init]
-	defaultBranch = master
+  defaultBranch = master
 
+[push]
+  autoSetupRemote = true
+
+[rebase]
+  autoSquash = true
+
+[user]
+  name = Julien Vincent
+  email = m@julienvincent.io
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFrtvt1/rcCsF7Jf4zgmu/vjRnzEXMlXzt8FmouxCxFH
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[pull]
+	rebase = true

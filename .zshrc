@@ -1,24 +1,37 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export ZSH="/Users/julienvincent/.oh-my-zsh"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
 ENABLE_CORRECTION="false"
+MODE_INDICATOR=
 
-plugins=(git)
+plugins=(git zsh-vim-mode)
 
 source $ZSH/oh-my-zsh.sh
 
 # ----- SETTINGS ----- #
 
-# Enable VIM
-#set keyseq-timeout 0
-#set -o vi
+export EDITOR=vim
+
+# == vi-mode plugin ==
+
+# makes pressing esc instant, might introduce other side-effects - not sure
+export KEYTIMEOUT=1
+
+# == JourneyApps ==
+
+# Configured the journey-formatter precommit hook to automatically format and git add files when committing
+export JOURNEY_FORMATTER_AUTO_FORMAT=1
+export AWS_VAULT_KEYCHAIN_NAME=login
+
+# == FZF ==
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob=\!.git"
+
+_fzf_compgen_path() {
+  rg --files --hidden --glob=\!.git . "$1"
+}
+
+_fzf_compgen_dir() {
+  rg --hidden --files --glob=\!.git --null . "$1" | xargs -0 dirname | uniq
+}
 
 # ----- FUNCTIONS ----- #
 
@@ -26,8 +39,13 @@ sternc () {
   stern "${@}" -o raw | grep --line-buffered '^{"' --color=never
 }
 
+flush-dns () {
+  sudo dscacheutil -flushcache;
+  sudo killall -HUP mDNSResponder
+}
+
 # delete local git branches no longer present on the remote
-pruneGitBranches () {
+git-prune-branches () {
   git remote prune origin
 
   git branch --merged | sed  's/\*.*//' > \
@@ -36,8 +54,34 @@ pruneGitBranches () {
   xargs git branch -d < /tmp/merged-branches
 }
 
+# Find processes by their bound ports
+pid-by-port () {
+  sudo lsof -i -n -P | grep TCP | grep $1
+}
+
 prenv () {
   env $(cat .env) "${@}"
+}
+
+grepf() {
+  fzf --no-sort --filter "${@}"
+}
+
+nclean() {
+  rm -r **/node_modules || true
+  rm -r **/dist || true
+  rm **/*.tsbuildinfo || true
+}
+
+nfclean() {
+  nclean && rm pnpm-lock.yaml
+}
+
+k() {
+  kubectl "${@}"
+}
+p() {
+  pnpm "${@}"
 }
 
 # Function to shorten keypresses for authenticating a command with
@@ -66,7 +110,7 @@ alias ka="kafkactl"
 
 alias ls="lsd"
 
-# alias wo="webstorm ."
+alias wo="webstorm ."
 alias rmo="rubymine ."
 alias co="code --add ."
 
@@ -76,29 +120,30 @@ alias keyrepeat-on="defaults write -g ApplePressAndHoldEnabled -bool true"
 alias iams="iam kubernetes-staging"
 alias iamp="iam kubernetes-production"
 
-alias git-prune-branches="pruneGitBranches"
 alias fscan="du -hs * | sort -rh | head -10"
 
 # ----- EXPORTS ----- #
 
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/gcloud/bin:$PATH"
-
-export EDITOR=vim
-export AWS_VAULT_KEYCHAIN_NAME=login
-
-# Configured the journey-formatter precommit hook to automatically format and git add files when committing
-export JOURNEY_FORMATTER_AUTO_FORMAT=1
-
-export PULUMI_K8S_SUPPRESS_HELM_HOOK_WARNINGS=true
-
-# ----- AUTO ----- #
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="$HOME/.bin:$PATH"
 
 eval "$(fnm env)"
 eval "$(rbenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export PNPM_HOME="/Users/julienvincent/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# bun
+[ -s "/Users/julienvincent/.bun/_bun" ] && source "/Users/julienvincent/.bun/_bun"
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# starship
+eval "$(starship init zsh)"
