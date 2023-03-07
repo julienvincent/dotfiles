@@ -33,6 +33,7 @@
 
 [rebase]
   autoSquash = true
+  updateRefs = true
 
 [user]
   name = Julien Vincent
@@ -52,3 +53,6 @@
 
 [pull]
 	rebase = true
+
+[fetch]
+	prune = true

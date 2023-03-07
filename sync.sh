@@ -3,8 +3,9 @@
 set -eo pipefail
 
 cp ~/.zshrc .zshrc
-cp ~/.config/starship.toml starship.toml
 cp ~/.p10k.zsh .p10k.zsh
 cp ~/.vimrc .vimrc
-cp ~/.config/karabiner/karabiner.json .karabiner.json
 cp ~/.gitconfig .gitconfig
+
+cp ~/.config/starship.toml .config/starship.toml
+cp ~/.config/karabiner/karabiner.json .config/karabiner/karabiner.json

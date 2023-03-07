@@ -94,7 +94,23 @@ iam () {
   aws-vault exec "${1}" -- "${@:2}"
 }
 
+dot(){
+  if [[ "$#" -eq 0 ]]; then
+    (cd /
+    for i in $(dotfiles ls-files); do
+      echo -n "$(dotfiles -c color.status=always status $i -s | sed "s#$i##")"
+      echo -e "¬/$i¬\e[0;33m$(dotfiles -c color.ui=always log -1 --format="%s" -- $i)\e[0m"
+    done
+    ) | column -t --separator=¬ -T2
+  else
+    dotfiles $*
+  fi
+}
+
 # ----- AUTO-COMPLETION ----- #
+
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
 
 source <(kubectl completion zsh)
 source <(stern --completion=zsh)
@@ -122,14 +138,13 @@ alias iamp="iam kubernetes-production"
 
 alias fscan="du -hs * | sort -rh | head -10"
 
+alias dotfiles="git --git-dir=${HOME}/.dotfiles --work-tree=/"
+
 # ----- EXPORTS ----- #
 
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/gcloud/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
-
-eval "$(fnm env)"
-eval "$(rbenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -139,11 +154,6 @@ export PATH="$PNPM_HOME:$PATH"
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# bun
-[ -s "/Users/julienvincent/.bun/_bun" ] && source "/Users/julienvincent/.bun/_bun"
+eval "$(rtx activate -s zsh)"
 
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# starship
 eval "$(starship init zsh)"
