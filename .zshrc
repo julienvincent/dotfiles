@@ -10,6 +10,7 @@ source $ZSH/oh-my-zsh.sh
 # ----- SETTINGS ----- #
 
 export EDITOR=vim
+export LS_COLORS="di=01;34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=37;41:sg=30;43:tw=30;42:ow=34;42:"
 
 # == vi-mode plugin ==
 

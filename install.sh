@@ -10,7 +10,7 @@ brew install \
   awscli \
   docker-credential-helper-ecr \
   helm \
-  babashka \
+  borkdude/brew/babashka \
   hey \
   iperf3 \
   starship \
@@ -20,7 +20,7 @@ brew install \
   fzf \
   just \
   restic \
-  kafkactl \
+  deviceinsight/packages/kafkactl \
   ripgrep \
   tig \
   git \
@@ -33,3 +33,8 @@ brew install \
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 ./sync-down.sh
+
+$(brew --prefix)/opt/fzf/install
+
+defaults write -g ApplePressAndHoldEnabled -bool false
+defaults write -g ApplePressAndHoldEnabled -bool false
